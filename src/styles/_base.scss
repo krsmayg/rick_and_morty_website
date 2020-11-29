@@ -1,0 +1,30 @@
+html {
+  font-size: 62.5%; // 1rem = 10px
+  // @include breakpoint(medium) {
+  //   font-size: 56.25%;  // 1rem = 9px
+  // }
+ 
+  // @include breakpoint(small) {
+  //   font-size: 50%;  // 1rem = 8px
+  // }
+}
+
+body {
+  margin: 0;
+  font-family: 'Epilogue', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+.main-content {
+  margin-top: 10rem;
+  padding:  0 3rem;
+  max-width: calc(1440px + 12rem);
+  margin-left: auto;
+  margin-right: auto;
+}
