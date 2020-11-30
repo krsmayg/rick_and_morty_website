@@ -6,7 +6,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PropTypes from 'prop-types';
 const FilterPanelItem = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const [filterElement, setFilterElement] = React.useState(props.title);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -14,9 +14,15 @@ const FilterPanelItem = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleFilter = (value) => {
+    console.log(value);
+    setFilterElement(value);
+    props.filterObjHandler(props.title, value);
+    handleClose();
+  }
   const renderFilters = (
     props.filterArray.map(el => (
-      <MenuItem onClick={handleClose} style={{fontSize: 14}} >{el}</MenuItem>
+      <MenuItem onClick={() => handleFilter(el)} style={{fontSize: 14}} >{el}</MenuItem>
     ))
   )
   return (
@@ -28,7 +34,7 @@ const FilterPanelItem = (props) => {
         onClick={handleClick}
         style={{fontSize: 14}}
       >
-        {props.title} <ExpandMoreIcon fontSize="default" />
+        {filterElement} <ExpandMoreIcon fontSize="default" />
       </Button>
       <Menu
         id="simple-menu"

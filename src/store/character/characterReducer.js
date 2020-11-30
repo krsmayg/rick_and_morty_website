@@ -1,4 +1,4 @@
-import { FETCH_CHARACTERS } from "../actionTypes";
+import { FETCH_CHARACTERS, FETCH_FILTER_CHARACTERS } from "../actionTypes";
 const initialState = {
   characters: [],
   total: 0
@@ -12,7 +12,14 @@ export default (state = initialState, action) => {
         characters: action.payload.characters,
         total: action.payload.total
       };
+    case FETCH_FILTER_CHARACTERS:
+      return {
+        ...state,
+        characters: action.payload.characters,
+        total: action.payload.total
+      };
     default:
       return state;
   }
 };
+

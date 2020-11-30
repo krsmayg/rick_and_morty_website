@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import HomeBoard from "../../components/UI/HomeBoard";
-import { fetchAllCharacters } from "../../store/character/characterActions";
+import { fetchAllCharacters, fetchFilteredCharacters } from "../../store/character/characterActions";
 import CharacterList from "../../components/CharacterList";
 import Pagination from "@material-ui/lab/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
-import FilterCharacters from '../../components/FilterCharacters'
+import FilterCharacters from '../../components/FilterCharacters';
+import {generateString} from "../../utils/filtering"
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -20,8 +21,16 @@ const useStyles = makeStyles((theme) => ({
 function CharacterPage(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(1);
+  const [filterObj, setFilterObj] = React.useState({
+    gender: '',
+    status: '',
+    species: '',
+  });
+  const filterObjHandler = (type,value) => {
+    setFilterObj(filterObj,filterObj[type.toLowerCase()] = value);
+    props.fetchFilteredCharacters(page, generateString(filterObj));
+  }
   const handleChange = (event, value) => {
-    console.log(value);
     setPage(value);
     props.fetchAllCharacters(value);
   };
@@ -30,7 +39,7 @@ function CharacterPage(props) {
   return (
     <>
       <HomeBoard title="Characters" />
-      <FilterCharacters />
+      <FilterCharacters filterObjHandler = {filterObjHandler}  />
       <CharacterList characters={props.characters} />
       <div className={classes.root}>
         <Pagination count={props.total} page={page} onChange={handleChange} />
@@ -44,4 +53,4 @@ const mapStateToProps = (state) => {
     total: state.characters.total,
   };
 };
-export default connect(mapStateToProps, { fetchAllCharacters })(CharacterPage);
+export default connect(mapStateToProps, { fetchAllCharacters,fetchFilteredCharacters })(CharacterPage);
