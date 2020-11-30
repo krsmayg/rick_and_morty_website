@@ -38,9 +38,9 @@ const CharacterListItem = (props) => {
         <span className="character-list__item__title">
           {props.character.name}
         </span>
-        <span>{props.character.status}</span>
+        {renderPopUp}
       </div>
-      {renderPopUp}
+      
     </>
   );
 };

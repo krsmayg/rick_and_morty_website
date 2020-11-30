@@ -5,15 +5,14 @@
   flex-wrap: wrap;
   &__popup{
     position: absolute;
-    top: 50%;
-    left: 40%;
     background-color: #fff;
     z-index: 2222;
     padding: 10px;
     border-radius:5px;
-    min-width: 300px;
+    min-width: 250px;
     display: flex;
     flex-direction: column;
+    top: 20px;
     // align-items: center;
     & img {
       position: relative;
