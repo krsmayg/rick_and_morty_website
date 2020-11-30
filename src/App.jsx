@@ -13,8 +13,8 @@ function App() {
         <Switch>
           <Route path="/locations" component ={LocationsPage}></Route>
           <Route path="/episodes" component ={EpisodePage}></Route>
-          <Route path="/characters" component ={CharactersPage} exact></Route>
-          <Redirect from="/" to="/episode" />
+          <Route path="/characters" component ={CharactersPage} ></Route>
+          <Redirect from="/" to="/episode"  exact/>
         </Switch>
       </Layout>   
     </div>

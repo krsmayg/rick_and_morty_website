@@ -1,0 +1,56 @@
+.character-list {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  flex-wrap: wrap;
+  
+  &__item {
+    color: #10162f;
+    border-width: 1px;
+    border-color: #10162f;
+    border-radius: 2px;
+    border-style: solid;
+    margin-top: 10px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+    transition: transform .2s;
+    cursor: pointer;
+
+    &:hover {
+      transform: translate(0.25rem, -0.25rem);
+    }
+
+    // &::after {
+    //   z-index: -2;
+    //   background-color: #10162f;
+    // }
+    // &::before,   &::after {
+    //   content: '';
+    //   z-index: -1;
+    //   position: absolute;
+    //   background-color: inherit;
+    //   border-width: inherit;
+    //   border-color: inherit;
+    //   border-radius: inherit;
+    //   border-style: inherit;
+    //   top: -1px;
+    //   left: -1px;
+    //   width: calc(100% + 2px);
+    //   height: calc(100% + 2px);
+    // }
+
+    &__title {
+      padding: 4px;
+      color: #fff;
+      background: #e74c3c;
+      font-size: 14px;
+      align-self: flex-end;
+      // margin-top: 5px;
+    }
+  }
+}
+.MuiPaginationItem-root {
+  font-size: 14px !important;
+}
