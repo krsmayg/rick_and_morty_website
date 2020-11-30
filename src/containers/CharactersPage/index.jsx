@@ -5,7 +5,7 @@ import { fetchAllCharacters } from "../../store/character/characterActions";
 import CharacterList from "../../components/CharacterList";
 import Pagination from "@material-ui/lab/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
-
+import FilterCharacters from '../../components/FilterCharacters'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -30,6 +30,7 @@ function CharacterPage(props) {
   return (
     <>
       <HomeBoard title="Characters" />
+      <FilterCharacters />
       <CharacterList characters={props.characters} />
       <div className={classes.root}>
         <Pagination count={props.total} page={page} onChange={handleChange} />
