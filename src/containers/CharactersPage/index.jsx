@@ -6,7 +6,7 @@ import CharacterList from "../../components/CharacterList";
 import Pagination from "@material-ui/lab/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
 import FilterCharacters from '../../components/FilterCharacters';
-import {generateString} from "../../utils/filtering"
+import {generateString} from "../../utils/filtering";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",

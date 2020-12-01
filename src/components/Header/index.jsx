@@ -11,6 +11,7 @@ const useStyles = makeStyles({
     color: "#000",
     // boxShadow: "none",
     // borderBottom: '1px solid #10162f'
+    zIndex: '333333'
   },
   navigationItem: {
     marginLeft: "15px",
