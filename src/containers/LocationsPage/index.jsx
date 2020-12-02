@@ -33,8 +33,8 @@ const LocationsPage = (props) => {
   const handlePageChange = (event, value) => {
     setPage(value);
     deepEqual(filterObj, copyObj)
-      ? props.fetchLocations(page)
-      : props.fetchFilterLocations(page, generateString(filterObj));
+      ? props.fetchLocations(value)
+      : props.fetchFilterLocations(value, generateString(filterObj));
   };
   return (
     <>

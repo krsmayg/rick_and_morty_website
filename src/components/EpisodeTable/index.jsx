@@ -12,17 +12,15 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
-import FilterLocations from "../FilterLocations";
-
+import FilterEpisodes from "../FilterEpisodes";
 const columns = [
   { id: "id", label: "ID", minWidth: 100 },
   { id: "name", label: "Name", minWidth: 170 },
-  { id: "type", label: "Type", minWidth: 170, align: "right" },
-  { id: "dimension", label: "Dimension", minWidth: 170, align: "right" },
+  { id: "episode", label: "Episode", minWidth: 170, align: "right" },
 ];
 
-function createData(id, name, type, dimension) {
-  return { id, name, type, dimension };
+function createData(id, name, episode) {
+  return { id, name, episode };
 }
 
 const useStyles = makeStyles({
@@ -42,18 +40,18 @@ const useStyles = makeStyles({
     fontSize: "14px",
   },
 });
-function LocationTable (props)  {
+function EpisodeTable (props)  {
   const classes = useStyles();
   const rows =
-    props.locations !== undefined
-      ? props.locations.map((loc) =>
-          createData(loc.id, loc.name, loc.type, loc.dimension)
+    props.episodes !== undefined
+      ? props.episodes.map((episode) =>
+          createData(episode.id, episode.name, episode.episode)
         )
       : [];
   const tableToolbar = (
     <Toolbar>
       <div style={{ flex: 1 }}>
-        <FilterLocations
+        <FilterEpisodes
           {...props}
         />
       </div>
@@ -117,5 +115,4 @@ function LocationTable (props)  {
     </Paper>
   );
 };
-
-export default LocationTable;
+export default EpisodeTable
