@@ -54,6 +54,9 @@ const Header = () => {
           <Typography variant="h4" className={classes.navigationItem}>
             <Link to="/episodes">Episodes</Link>
           </Typography>
+          <Typography variant="h4" className={classes.navigationItem}>
+            <Link to="/watch-list">Watch List</Link>
+          </Typography>
         </div>
       </Toolbar>
     </AppBar>
