@@ -6,9 +6,9 @@ const FilterLocations = (props) => {
   return (
     <div className="filter-panel">
       {/* <FilterPanelItem  title="Type" filterArray = {filters.species} {...props} /> */}
-      <FilterInputItem searchLabel="Name" inputHander ={props.nameHandler}  />
-      <FilterInputItem searchLabel="Type" inputHander = {props.typeHandler}  />
-      <FilterInputItem searchLabel="Dimension" inputHander = {props.dimensionHandler}  />
+      <FilterInputItem searchLabel="Name" inputHander ={props.filterObjHandler}  />
+      <FilterInputItem searchLabel="Type" inputHander = {props.filterObjHandler}  />
+      <FilterInputItem searchLabel="Dimension" inputHander = {props.filterObjHandler}  />
     </div>
   );
 };

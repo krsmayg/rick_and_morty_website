@@ -2,8 +2,13 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import HomeBoard from "../../components/UI/HomeBoard";
 import LocationTable from "../../components/LocationTable";
-import { fetchLocations,fetchFilterLocations } from "../../store/location/locationActions";
-import {generateString} from "../../utils/filtering";
+import {
+  fetchLocations,
+  fetchFilterLocations,
+} from "../../store/location/locationActions";
+import { generateString } from "../../utils/filtering";
+import { deepEqual } from "../../utils/filtering";
+
 const LocationsPage = (props) => {
   const [page, setPage] = React.useState(1);
   const [filterObj, setFilterObj] = React.useState({
@@ -11,24 +16,25 @@ const LocationsPage = (props) => {
     type: "",
     dimension: "",
   });
-  const nameHandler = (event) => {
-    setFilterObj(filterObj,filterObj['name'] = event.target.value);
-    props.fetchFilterLocations(page, generateString(filterObj));
-  };
-  const typeHandler = (event) => {
-    setFilterObj(filterObj,filterObj['type'] = event.target.value);
-    props.fetchFilterLocations(page, generateString(filterObj));
+  const [copyObj, setCopyObj] = React.useState({});
 
-  };
-  const dimensionHandler = (event) => {
-    setFilterObj(filterObj,filterObj['dimension'] = event.target.value);
+  useEffect(() => {
+    props.fetchLocations(1);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    setCopyObj({ ...filterObj });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const filterObjHandler = (event, type) => {
+    setPage(1);
+    setFilterObj(filterObj, (filterObj[type] = event.target.value));
     props.fetchFilterLocations(page, generateString(filterObj));
   };
-  useEffect(() => props.fetchLocations(1), []); // eslint-disable-line react-hooks/exhaustive-deps
   const handlePageChange = (event, value) => {
-    console.log(value);
     setPage(value);
-    props.fetchLocations(value);
+    deepEqual(filterObj, copyObj)
+      ? props.fetchLocations(page)
+      : props.fetchFilterLocations(page, generateString(filterObj));
   };
   return (
     <>
@@ -38,9 +44,7 @@ const LocationsPage = (props) => {
         handlePageChange={handlePageChange}
         pages={props.total}
         page={page}
-        nameHandler = {nameHandler}
-        typeHandler = {typeHandler}
-        dimensionHandler = {dimensionHandler}
+        filterObjHandler={filterObjHandler}
       />
     </>
   );
@@ -51,4 +55,7 @@ const mapStateToProps = (state) => {
     total: state.locations.total,
   };
 };
-export default connect(mapStateToProps, { fetchLocations, fetchFilterLocations })(LocationsPage);
+export default connect(mapStateToProps, {
+  fetchLocations,
+  fetchFilterLocations,
+})(LocationsPage);

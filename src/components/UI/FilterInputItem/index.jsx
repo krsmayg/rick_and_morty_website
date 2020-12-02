@@ -61,7 +61,7 @@ const FilterInputItem = (props) => {
             input: classes.inputInput,
           }}
           inputProps={{ "aria-label": "search" }}
-          onChange={props.inputHander}
+          onChange={(event) => props.inputHander(event,props.searchLabel.toLowerCase())}
         />
       </div>
     </div>

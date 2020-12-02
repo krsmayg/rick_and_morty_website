@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import HomeBoard from "../../components/UI/HomeBoard";
-import { fetchAllCharacters, fetchFilteredCharacters } from "../../store/character/characterActions";
+import {
+  fetchAllCharacters,
+  fetchFilteredCharacters,
+} from "../../store/character/characterActions";
 import CharacterList from "../../components/CharacterList";
 import Pagination from "@material-ui/lab/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
-import FilterCharacters from '../../components/FilterCharacters';
-import {generateString} from "../../utils/filtering";
+import FilterCharacters from "../../components/FilterCharacters";
+import { generateString } from "../../utils/filtering";
+import { deepEqual } from "../../utils/filtering";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -22,24 +27,32 @@ function CharacterPage(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(1);
   const [filterObj, setFilterObj] = React.useState({
-    gender: '',
-    status: '',
-    species: '',
+    gender: "",
+    status: "",
+    species: "",
   });
-  const filterObjHandler = (type,value) => {
-    setFilterObj(filterObj,filterObj[type.toLowerCase()] = value);
+  const [copyObj, setCopyObj] = React.useState({});
+
+  const filterObjHandler = (type, value) => {
+    setFilterObj(filterObj, (filterObj[type.toLowerCase()] = value));
     props.fetchFilteredCharacters(page, generateString(filterObj));
-  }
+    setPage(1);
+  };
   const handleChange = (event, value) => {
+    deepEqual(filterObj, copyObj)
+      ? props.fetchAllCharacters(value)
+      : props.fetchFilteredCharacters(value, generateString(filterObj));
     setPage(value);
-    props.fetchAllCharacters(value);
   };
   useEffect(() => props.fetchAllCharacters(1), []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    setCopyObj({ ...filterObj });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
       <HomeBoard title="Characters" />
-      <FilterCharacters filterObjHandler = {filterObjHandler}  />
+      <FilterCharacters filterObjHandler={filterObjHandler} />
       <CharacterList characters={props.characters} />
       <div className={classes.root}>
         <Pagination count={props.total} page={page} onChange={handleChange} />
@@ -53,4 +66,7 @@ const mapStateToProps = (state) => {
     total: state.characters.total,
   };
 };
-export default connect(mapStateToProps, { fetchAllCharacters,fetchFilteredCharacters })(CharacterPage);
+export default connect(mapStateToProps, {
+  fetchAllCharacters,
+  fetchFilteredCharacters,
+})(CharacterPage);
