@@ -15,7 +15,7 @@ function App() {
           <Route path="/episodes" component ={EpisodePage}></Route>
           <Route path="/characters" component ={CharactersPage} ></Route>
           <Route path="/watch-list" component ={WatchListPage} ></Route>
-          <Redirect from="/" to="/episodes"  exact/>
+          <Redirect from="/" to="/characters"  exact/>
         </Switch>
       </Layout>   
     </div>
